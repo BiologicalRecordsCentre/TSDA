@@ -65,17 +65,17 @@ muZ_un[,,1] = out$sims.list$init.occ
 ###### This next step no longer works as the output parameters have changed ######
 ###### and also not sure if the year random effect on persistance is now incorporated #############
 
-for(i in 2:nyear){
-  muZ_un[,,i] = muZ_un[,,i-1] * inv.logit(out$sims.list$beta0.phi) + (1-muZ_un[,,i-1]) * out$sims.list$gamma
+for(t in 2:nyear){
+  muZ_un[,,t] = muZ_un[,,t-1] * inv.logit(out$sims.list$beta0.phi) + (1-muZ_un[,,t-1]) * out$sims.list$gamma
 } # muZ_un
 
 # for a site where harlequin arrived, there is no effect in the first year
 # so occupancy is identical prior to this
 muZ_H[,,1:Hyear1] <- muZ_un[,,1:Hyear1]
   
-for(i in (Hyear1+1):nyear){
- muZ_H[,,i] = muZ_H[,,i-1]  * inv.logit(out$sims.list$beta0.phi + out$sims.list$beta1) + 
-          (1-muZ_H[,,i-1]) * out$sims.list$gamma
+for(t in (Hyear1+1):nyear){
+ muZ_H[,,t] = muZ_H[,,t-1]  * inv.logit(out$sims.list$beta0.phi + out$sims.list$beta1) + 
+          (1-muZ_H[,,t-1]) * out$sims.list$gamma
 }  # muZ_H
         
 
@@ -95,12 +95,12 @@ upper_un = matrix(NA, nrow=nyear, ncol=nspecies)
 mean_un = matrix(NA, nrow=nyear, ncol=nspecies)
 
 
-for(i in 1:nyear){
-  for(j in 1:nspecies){
-median_un[i,j] <- median(muZ_un[,j,i])
-lower_un[i,j] <- low(muZ_un[,j,i])
-upper_un[i,j] <- up(muZ_un[,j,i])
-mean_un[i,j] <- mean(muZ_un[,j,i])
+for(t in 1:nyear){
+  for(i in 1:nspecies){
+median_un[t,i] <- median(muZ_un[,i,t])
+lower_un[t,i] <- low(muZ_un[,i,t])
+upper_un[t,i] <- up(muZ_un[,i,t])
+mean_un[t,i] <- mean(muZ_un[,i,t])
   }
 }
 
@@ -111,13 +111,12 @@ upper_H = matrix(NA, nrow=nyear, ncol=nspecies)
 mean_H = matrix(NA, nrow=nyear, ncol=nspecies)
 
 
-for(i in 
-    1:nyear){
-  for(j in 1:nspecies){
-    median_H[i,j] <- median(muZ_H[,j,i])
-    lower_H[i,j] <- low(muZ_H[,j,i])
-    upper_H[i,j] <- up(muZ_H[,j,i])
-    mean_H[i,j] <- mean(muZ_H[,j,i])
+for(t in 1:nyear){
+  for(i in 1:nspecies){
+    median_H[t,i] <- median(muZ_H[,i,t])
+    lower_H[t,i] <- low(muZ_H[,i,t])
+    upper_H[t,i] <- up(muZ_H[,i,t])
+    mean_H[t,i] <- mean(muZ_H[,i,t])
   }
 }
 
