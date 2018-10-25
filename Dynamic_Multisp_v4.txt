@@ -24,9 +24,9 @@ for(i in 1:nspecies){
   beta1[i] ~ dnorm(mu.beta1, tau.beta1) 
  }
 
-# for (t in 1:nyear) {
-#  alpha.phi[t] ~ dnorm(0, tau.alpha.phi)
-# }
+ for (t in 1:nyear) {
+  alpha.phi[t] ~ dnorm(0, tau.alpha.phi)
+ }
 
 
 
@@ -44,8 +44,8 @@ mu.beta1 <- logit(beta1.mean)
 sd.beta1 ~ dt(0,1,1)T(0,)
 tau.beta1 <- 1/(sd.beta1 * sd.beta1)
 
-# sd.alpha.phi ~ dt(0,1,1)T(0,)     
-# tau.alpha.phi <- 1/(sd.alpha.phi * sd.alpha.phi)
+ sd.alpha.phi ~ dt(0,1,1)T(0,)     
+ tau.alpha.phi <- 1/(sd.alpha.phi * sd.alpha.phi)
 
 ############################### Observation model Priors 
 
@@ -58,7 +58,7 @@ for(i in 1:nspecies){
 
 for (t in 1:nyear) {
   alpha.p[t] ~ dnorm(0, tau.alpha.p)
-alpha.phi[t] ~ dnorm(0, tau.alpha.phi)
+#alpha.phi[t] ~ dnorm(0, tau.alpha.phi)
 }
 
 
@@ -72,12 +72,12 @@ sd.beta2.p ~ dt(0,1,1)T(0,)
 sd.beta3.p ~ dt(0,1,1)T(0,)            
 sd.beta4.p ~ dt(0,1,1)T(0,) 
 sd.alpha.p ~ dt(0,1,1)T(0,) 
-sd.alpha.phi ~ dt(0,1,1)T(0,) 
+#sd.alpha.phi ~ dt(0,1,1)T(0,) 
 tau.beta2.p <- 1/(sd.beta2.p * sd.beta2.p)
 tau.beta3.p <- 1/(sd.beta3.p * sd.beta3.p)
 tau.beta4.p <- 1/(sd.beta4.p * sd.beta4.p)
 tau.alpha.p <- 1/(sd.alpha.p * sd.alpha.p)
-tau.alpha.phi <- 1/(sd.alpha.phi * sd.alpha.phi)
+#tau.alpha.phi <- 1/(sd.alpha.phi * sd.alpha.phi)
   
 
 ### Need to change to express the SD as half-cauchy and then define precision as 1/sd^2       
