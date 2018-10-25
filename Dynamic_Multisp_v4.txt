@@ -119,8 +119,8 @@ for (i in 1:nspecies){
 
 # derived parameters - the predicted occupancy for occupied and unoccupied cells
 for (i in 1:nspecies){
- muz0[i,1] <- init.occ[i]
- muz1[i,1] <- init.occ[i]
+ muZ0[i,1] <- init.occ[i]
+ muZ1[i,1] <- init.occ[i]
  for (t in 2:nyear){
     logit(phi0[i,t]) <- alpha.phi[t] + beta0.phi[i]
     muZ0[i,t] <- muZ0[i,t-1] * phi0[i,t] + (1-muZ0[i,t-1]) * gamma[i]
