@@ -100,7 +100,8 @@ parameters <- c("init.occ", "beta0.phi", "beta1", "beta2.p", "gamma",
                 'tau.alpha.phi',
                 'mu.beta2.p', 'tau.beta2.p', # mean detectability on a list of length 1 (and precision across species)
                 'mu.beta3.p', 'tau.beta3.p', # mean difference of short lists over single speceis lists & precision across species 
-                'mu.beta4.p','tau.beta4.p' # mean difference of long lists over single speceis lists & precision across species
+                'mu.beta4.p','tau.beta4.p', # mean difference of long lists over single speceis lists & precision across species
+                'muZ0','muZ1' # derived parameters
                ) 
 
 # define the dataframe: everything from lady_data except the species info (to be added below)
