@@ -38,7 +38,7 @@ load("ladybird_180220.RData")
 #datecode <- format(Sys.Date(), '%y%m%d')
 #results_folder <-paste0(datecode)
 #dir.create(results_folder)
-results_folder <- "/home/scratch/pywell/jachat/ladybird/model4/R1_its5000"
+results_folder <- "/home/scratch/pywell/jachat/ladybird/model4/R1_its10000"
 
 ###################################################  Get Colin's conversion code
 source(paste0(wd, "/source/", "reformat_gr.R"))
@@ -58,7 +58,7 @@ pr2sd <- function(pr) sqrt(1/pr)
 
 
 ################################################ define the BUGS model file
-model_file <- 'Dynamic_Multisp_v5.txt'
+model_file <- 'Dynamic_Multisp_v4.txt'
 
 
 ################### bugs settings
@@ -71,7 +71,7 @@ model_file <- 'Dynamic_Multisp_v5.txt'
 #ni<-100; nb<-ni/2; nt<-1; nc<-3; R=200 # for quick testing: ~1 min per sp
 #ni & R & nt are set externally
 nt <- 3
-ni <- 5000
+ni <- 10000
 R <- 1
 nb<-ni/2
 nc<-3
@@ -151,7 +151,7 @@ gc()
 source('source/daisychain.R') # Daisy chain function
 # from https://github.com/NERC-CEH/cluster_guides/wiki/Cirrus#getting-files-to-cirrus-using-winscp
 
-modelout<-output[[2]]
+rdataFile<-load(file=paste0(results_folder, '/',model_file,'_',R,'_',ni,'.rData'))
 
-daisyChain(modelout, total.it = 40000, outDir = results_folder, 
-           by.it = 5000, n.thin = nt, quiet = TRUE)
+daisyChain(rdataFile, total.t = 40000, outDir = results_folder, 
+                       by.it = 5000, n.thin = nt, quiet = TRUE)
